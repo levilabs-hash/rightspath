@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #172033;
+  --slate: #4c5566;
+  --paper: #f7f8fa;
+  --surface: #ffffff;
+  --blue: #3157d5;
+  --blue-soft: #eef2ff;
+  --blue-press: #2748b8;
+  --green: #267a58;
+  --green-soft: #e8f5ee;
+  --amber: #a86616;
+  --amber-soft: #fbf4e8;
+  --red: #b83a3a;
+  --red-soft: #f8eeee;
+  --border: #e4e7ec;
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-slate: var(--slate);
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-blue: var(--blue);
+  --color-blue-soft: var(--blue-soft);
+  --color-blue-press: var(--blue-press);
+  --color-green: var(--green);
+  --color-green-soft: var(--green-soft);
+  --color-amber: var(--amber);
+  --color-amber-soft: var(--amber-soft);
+  --color-red: var(--red);
+  --color-red-soft: var(--red-soft);
+  --color-border: var(--border);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-dm-serif), Georgia, "Times New Roman", serif;
+  --radius-button: 10px;
+  --radius-input: 12px;
+  --radius-card: 16px;
+  --radius-surface: 20px;
+}
+
+@layer base {
+  html {
+    background: var(--paper);
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--blue-soft);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+
+    .rise-in {
+      animation: none !important;
+    }
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rise-in {
+  animation: rise-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  z-index: 50;
+  transform: translateY(-160%);
+  border-radius: var(--radius-button);
+  background: var(--surface);
+  color: var(--ink);
+  padding: 8px 16px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.skip-link:focus {
+  transform: none;
+}
