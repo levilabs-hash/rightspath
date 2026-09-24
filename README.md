@@ -1,10 +1,5 @@
-Yes. If you want **one complete README that you can paste in one shot**, let's do that instead of playing README Jenga. 😭
 
-I checked the actual repository and `package.json` first, so I'm not inventing dependencies or commands. The repo currently contains the `app`, `components`, `data/california`, `lib`, and `tests` structure, and the package scripts include `dev`, `build`, `start`, `lint`, `typecheck`, and `test`. ([GitHub][1])
 
-I also checked the current official California sources so the legal-scope section doesn't accidentally claim something the source doesn't support. ([California DOJ AG Office][2])
-
-### Replace the entire README with this
 
 ````markdown
 # RightsPath
