@@ -240,7 +240,7 @@ function depositParagraphs(
       "not received",
     ),
     factLine("Itemized statement date", facts.itemizedStatementDate),
-    factLine("Date an amount was returned", facts.returnDate),
+    factLine("Date returned", facts.returnDate),
     ...determination.comparisons.map((item) => `${item.title}. ${item.text}`),
   ];
   if (timing?.posture === "needs_information") {
