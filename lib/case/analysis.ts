@@ -501,7 +501,7 @@ function normalizeMoney(value: string) {
 function depositAmount(story: string) {
   const returned = returnedAmount(story);
   const pattern = new RegExp(
-    `(?:deposit\\s+(?:of\\s+|was\\s+|is\\s+)?(${MONEY_SOURCE})|(${MONEY_SOURCE})\\s+deposit)`,
+    `(?:deposit\\s+(?:of\\s+|was\\s+|is\\s+)?(${MONEY_SOURCE})|(${MONEY_SOURCE})\\s+(?:security\\s+)?deposit)`,
     "gi",
   );
   const adjacent: string[] = [];
@@ -597,6 +597,12 @@ function deductionsAmount(story: string) {
     ...story.matchAll(
       /deduct\w*\s+(?:of\s+)?(\$\s?(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d{2})?)|(\$\s?(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d{2})?)\s+(?:in\s+)?deduct/gi,
     ),
+    ...story.matchAll(
+      new RegExp(
+        `kept\\s+(${MONEY_SOURCE})\\s+from\\s+(?:my\\s+)?(?:security\\s+)?deposit`,
+        "gi",
+      ),
+    ),
   ].map((match) => (match[1] ?? match[2]).replace(/\s/g, ""));
   const explicit = distinctMoney(matches);
   if (explicit === "conflict") {
@@ -609,11 +615,11 @@ function returnDate(story: string) {
   const found = [
     ...story.matchAll(
       new RegExp(
-        String.raw`\b(?:returned|got back|received back)\s+on\s+(${DATE_PATTERN.source})`,
+        String.raw`\b(?:(?:returned|got back|received back)\s+on|(?:mailed|sent)\s+(?:me\s+)?(?:a\s+)?check\s+for\s+${MONEY_SOURCE}\s+on)\s+(${DATE_PATTERN.source})`,
         "gi",
       ),
     ),
-  ].map((match) => match[1] as string);
+  ].map((match) => (match[1] ?? match[2]) as string);
   const unique = new Set(found.map(dateKey));
   if (unique.size !== 1) {
     return null;
