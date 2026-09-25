@@ -628,7 +628,9 @@ function returnDate(story: string) {
 }
 
 function deductionReason(story: string) {
-  const relevant = sentences(story).filter((sentence) => /\bdeduct/i.test(sentence));
+  const relevant = sentences(story).filter((sentence) =>
+    /\bdeduct|\bkept\s+\$|\bcleaning\b|\brepairs?\b/i.test(sentence),
+  );
   if (relevant.length === 0) {
     return null;
   }
