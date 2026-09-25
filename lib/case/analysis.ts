@@ -559,6 +559,8 @@ function returnedAmount(story: string) {
     new RegExp(`got\\s+(${MONEY_SOURCE})\\s+back`, "gi"),
     new RegExp(`got back\\s+(${MONEY_SOURCE})`, "gi"),
     new RegExp(`received\\s+(${MONEY_SOURCE})\\s+back`, "gi"),
+    new RegExp(`mailed\\s+(?:me\\s+)?(?:a\\s+)?check\\s+for\\s+(${MONEY_SOURCE})`, "gi"),
+    new RegExp(`(?:mailed|sent)\\s+(?:me\\s+)?(?:a\\s+)?check\\s+for\\s+(${MONEY_SOURCE})`, "gi"),
   ];
   const found = patterns.flatMap((pattern) =>
     [...story.matchAll(pattern)].map((match) => normalizeMoney(match[1] as string)),
