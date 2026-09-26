@@ -958,7 +958,7 @@ function itemizedStatement(story: string) {
   }
 
   const negative =
-    /\bno itemized\b|\bwithout an itemized\b|\b(?:haven't|have not|didn't|did not|never)\s+(?:receive|received|gotten)\s+(?:an|the)\s+itemized\b/i;
+  /\bno itemized\b|\bwithout an itemized\b|\b(?:wasn't|was not)\s+(?:an|the)\s+itemized\b|\b(?:haven't|have not|didn't|did not|never)\s+(?:receive|received|gotten)\s+(?:an|the)\s+itemized\b/i;
   const affirmative =
     /\b(?:received|got|included|attached|sent|provided)\s+(?:me\s+|us\s+)?(?:an|the)\s+itemized\b|\bitemized statement\s+(?:was|were)\s+(?:sent|received|included|attached|provided)\b/i;
   let denied = false;

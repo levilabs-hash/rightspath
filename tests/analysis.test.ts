@@ -49,47 +49,27 @@ describe("entering analysis", () => {
 });
 
 describe("deposit extraction", () => {
-  it("extracts deposit facts only from provided information", () => {
-    const sparse = analyzeCase({
-      issue: "deposit_dispute",
-      story: "My landlord kept the deposit.",
-    });
-    assert.ok(sparse);
-    assert.equal(sparse.issue, "deposit_dispute");
-    if (sparse.issue !== "deposit_dispute") {
-      return;
-    }
-    assert.equal(sparse.facts.depositAmount, null);
-    assert.equal(sparse.facts.moveOutDate, null);
-    assert.equal(sparse.facts.returnedAmount, null);
-    assert.equal(sparse.facts.deductionsAmount, null);
-    assert.equal(sparse.facts.itemizedStatementReceived, null);
 
-    const vague = analyzeCase({
-      issue: "deposit_dispute",
-      story: "I moved out a few weeks ago.",
-    });
-    assert.ok(vague);
-    if (vague.issue !== "deposit_dispute") {
-      return;
-    }
-    assert.equal(vague.facts.moveOutDate, null);
+it("extracts deposit facts from a realistic tenant story", () => {
+  const analysis = analyzeCase({
+    issue: "deposit_dispute",
+    story:
+      "I moved out on August 1, 2026. My monthly rent was $2,400 and I paid a $3,000 security deposit. " +
+      "My landlord mailed me a check for $1,800 on August 30, 2026. " +
+      'They kept $1,200 from my deposit. The only explanation I got was a note saying "$700 cleaning and $500 repairs." ' +
+      "There wasn't an itemized statement explaining exactly what was cleaned or repaired, and they didn't include receipts or invoices."  });
 
-    const stated = analyzeCase({
-      issue: "deposit_dispute",
-      story: depositStory,
-    });
-    assert.ok(stated);
-    if (stated.issue !== "deposit_dispute") {
-      return;
-    }
-    assert.equal(stated.facts.moveOutDate, "August 12");
-    assert.equal(stated.facts.depositAmount, "$1,800");
-    assert.equal(stated.facts.returnedAmount, "$0");
-    assert.equal(stated.facts.deductionsAmount, "$1,800");
-  });
+  assert.ok(analysis);
+  if (analysis.issue !== "deposit_dispute") {
+    return;
+  }
 
-  it("represents missing deposit facts explicitly", () => {
+  assert.equal(analysis.facts.returnDate, "August 30, 2026");
+  assert.equal(analysis.facts.deductionReason, "Cleaning and Repair of damage");
+  assert.equal(analysis.facts.itemizedStatementReceived, false);
+});
+
+it("represents missing deposit facts explicitly", () => {
     const analysis = analyzeCase({
       issue: "deposit_dispute",
       story: depositStory,

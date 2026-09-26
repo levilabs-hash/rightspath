@@ -29,6 +29,7 @@ export function LetterView() {
   const { draft, setLetterDetails } = useCaseDraft();
   const mounted = useMounted();
   const analysis = mounted ? analyzeCase(draft) : null;
+  console.log("RIGHTSPATH DEBUG", analysis?.facts);
   const built = mounted ? buildLetter(analysis, new Date().toISOString().slice(0, 10)) : null;
   const [status, setStatus] = useState("");
 
