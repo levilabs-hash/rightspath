@@ -1,265 +1,218 @@
 
-
-
-````markdown
 # RightsPath
 
-**Know what comes next.**
+## Know what comes next.
 
-RightsPath is an AI-powered tenant-rights intake and action tool for California renters.
+RightsPath is an AI-powered tenant-rights intake and action-letter generator for California renters.
 
-It helps a renter turn a housing problem described in plain language into structured facts, identify missing information, understand relevant California legal information from verified sources, receive practical next steps, and generate a personalized action letter that can be downloaded as a PDF.
+It turns a messy housing story into structured facts, identifies missing information, connects the case to verified California legal sources, explains what those sources mean in plain language, produces a practical action plan, and generates a personalized action letter with PDF export.
 
-> **Human first. Legal second. AI third.**
+> **Your story → What we found → What we still need → Verified source → What to do next**
+
+[Live Demo](https://rightspath.vercel.app)
 
 ---
 
 ## The Problem
 
-Housing problems can become difficult to navigate very quickly.
+Housing problems rarely arrive as neatly structured legal cases.
 
-A renter dealing with a security-deposit dispute, neglected repairs, or an eviction notice may not know:
+A renter might know that their landlord kept part of a security deposit, ignored a repair, or served an eviction notice, but not know:
 
-- What information matters
-- What facts are still missing
-- Which rules may apply
-- What their next practical step should be
-- How to communicate their position clearly to a landlord
+- Which facts matter
+- What information is missing
+- Which legal rule applies
+- Where the rule comes from
+- What they should do next
+- How to turn their situation into a useful written request
 
-Legal information is often difficult to navigate, while legal-aid organizations can have limited capacity.
+Generic AI chatbots can produce fluent answers, but fluency is not the same thing as reliable legal guidance.
 
-RightsPath is designed to make the first step clearer.
+RightsPath focuses on the first practical step: turning a renter's story into a structured, source-grounded path forward.
 
 ---
 
 ## The Solution
 
-RightsPath combines structured case intake, verified legal rules, deterministic checks, and AI-assisted language interpretation into one guided workflow.
+RightsPath is deliberately designed as more than an "AI lawyer" chatbot.
 
-Instead of acting like a generic legal chatbot, RightsPath is designed around a concrete outcome:
+The system separates:
 
-**Understand the situation → identify what is missing → understand the relevant information → decide what to do next → create something usable.**
+1. **Natural-language interpretation**
+2. **Structured case facts**
+3. **Missing-information detection**
+4. **Verified legal-rule data**
+5. **Deterministic rule and date calculations**
+6. **Plain-language explanations**
+7. **Action planning**
+8. **Personalized letter generation**
+9. **PDF export**
 
-The final output can be a personalized action letter that the renter can review, edit, and download as a PDF.
+The goal is not to pretend that an AI model can decide a legal case.
 
----
-
-## Current Scope
-
-RightsPath currently focuses on **California residential tenancy** situations.
-
-The prototype supports three issue categories:
-
-### 1. Security Deposit Disputes
-
-The system collects relevant information such as:
-
-- Move-out date
-- Deposit amount
-- Amount returned
-- Deductions
-- Whether an itemized statement was received
-- Other facts needed to evaluate the situation
-
-### 2. Repair Neglect
-
-The system collects information such as:
-
-- Description of the repair problem
-- When the problem was reported
-- How it was reported
-- Landlord response
-- Potential safety concerns
-
-### 3. Eviction Notices
-
-The system collects information such as:
-
-- Notice type
-- Date received
-- Deadline stated on the notice
-- Reason given for the notice
-
-Eviction-related cases are handled conservatively because incorrect guidance can have serious consequences.
+The goal is to make the user's next step clearer.
 
 ---
 
 ## How It Works
 
-The core workflow is:
-
 ```text
-User story
-    ↓
-Structured facts
-    ↓
-Missing-fact detection
-    ↓
-Verified legal rules
-    ↓
-Deterministic checks
-    ↓
-Plain-language explanation
-    ↓
-Action plan
-    ↓
-Personalized letter
-    ↓
-PDF
+TENANT STORY
+     ↓
+STRUCTURED FACTS
+     ↓
+MISSING FACT DETECTION
+     ↓
+VERIFIED CALIFORNIA RULE
+     ↓
+DETERMINISTIC CHECK
+     ↓
+PLAIN-LANGUAGE EXPLANATION
+     ↓
+ACTION PLAN
+     ↓
+PERSONALIZED LETTER
+     ↓
+PDF EXPORT
 ````
-
-### Step 1: Tell RightsPath What Happened
-
-The renter describes their situation naturally instead of needing to understand legal terminology first.
-
-### Step 2: Structure the Story
-
-RightsPath organizes the description into relevant case facts.
-
-The system distinguishes between information the user actually provided and information that has not been established.
-
-### Step 3: Identify Missing Information
-
-RightsPath does not fill gaps by guessing.
-
-If an important fact is missing, the system explains what is missing and why that information matters.
-
-### Step 4: Check Verified Rules
-
-The structured case is evaluated against the application's verified California legal-rule data.
-
-The AI model is not treated as the legal authority.
-
-### Step 5: Explain the Situation
-
-Relevant information is presented in plain language rather than requiring the user to interpret legal terminology or raw statutes.
-
-### Step 6: Provide an Action Plan
-
-The user receives practical next steps based on the available information.
-
-### Step 7: Generate a Letter
-
-RightsPath creates a personalized action letter using the facts established during the case.
-
-### Step 8: Export a PDF
-
-The completed letter can be generated as a downloadable PDF.
-
----
-
-## Core Design Principle
 
 ### Human first. Legal second. AI third.
 
-RightsPath is intentionally designed so that the language model is not the source of truth.
+RightsPath is designed around a simple principle:
 
-AI is used primarily to:
+> **The user should understand what RightsPath knows, what it does not know, and what they can do next.**
 
-* Interpret natural-language descriptions
-* Organize user-provided information
-* Help explain information clearly
-* Assist with generating user-facing language
+AI is used to interpret and generate language.
 
-Verified legal rules provide the authority used by the application.
+Verified legal sources provide the legal basis.
 
-Deterministic logic handles structured calculations and checks where appropriate.
+Deterministic application logic handles structured rule conditions, calculations, and dates where appropriate.
 
-This separation is intended to reduce the risk of an AI model confidently inventing legal rules.
+When required information is missing, RightsPath surfaces the gap instead of manufacturing an answer.
 
 ---
 
-## Safety and Trust
+## Supported Scope
 
-RightsPath is designed as a legal-information and action-planning tool, not a replacement for a lawyer.
+The current prototype focuses on **California residential tenancy** and three primary issue categories:
 
-The system can recognize when important information is missing and avoid presenting an unsupported conclusion.
+### 1. Security Deposit Disputes
 
-The application uses explicit case states such as:
+RightsPath can structure information such as:
 
-* `READY`
-* `NEEDS_INFORMATION`
-* `ESCALATE`
+* Move-out date
+* Deposit amount
+* Amount returned
+* Deductions
+* Itemized-statement information
+* Other facts needed to evaluate the supported deposit workflow
 
-These states allow the system to distinguish between a case with sufficient structured information and one where additional information or human/legal assistance may be appropriate.
+### 2. Repair Neglect
 
-### No invented facts
+The intake can capture information such as:
 
-RightsPath is designed around a simple rule:
+* Description of the problem
+* When it was reported
+* How it was reported
+* Landlord response
+* Safety concerns
 
-**If the user did not establish a fact, the system should not pretend that the fact is known.**
+### 3. Eviction Notices
 
-### Conservative handling
+The workflow can capture information such as:
 
-The application is especially cautious with eviction-related situations.
+* Notice type
+* Notice date
+* Deadline
+* Stated reason
 
-RightsPath does not automatically tell a user that an eviction is illegal, instruct them to ignore a notice, or make other high-consequence recommendations without sufficient support.
+RightsPath intentionally does **not** attempt to cover every California housing law, local ordinance, property type, tenancy arrangement, or possible legal situation.
 
-When the available information is insufficient, the useful result may be identifying what still needs to be established.
+A narrow scope makes the prototype easier to validate and safer to reason about.
 
 ---
 
-## Legal Information Sources
+## Safety & Legal Boundaries
 
-The current legal-information scope is based on official California sources, including:
+RightsPath does not treat an LLM response as legal authority.
+
+The system is designed around three possible states:
+
+* **READY** — enough information exists for the supported workflow
+* **NEEDS_INFORMATION** — important facts are missing
+* **ESCALATE** — the situation is outside the supported scope or requires additional legal assistance
+
+### Missing information is not a reason to guess.
+
+If an important fact is unknown, RightsPath identifies what is missing and explains why it matters.
+
+The system is designed to avoid unsupported conclusions such as declaring that a landlord acted illegally when the available facts do not establish that conclusion.
+
+For higher-risk or uncertain situations, users are directed toward qualified legal or legal-aid assistance.
+
+RightsPath is an information and action-planning prototype, not a law firm and not a substitute for legal counsel.
+
+---
+
+## Verified Legal Sources
+
+The prototype uses publicly available California government legal information and self-help resources.
+
+Primary sources include:
 
 * California Department of Justice / Office of the Attorney General
 * California Courts Self-Help Guide
 
-For example, the California Attorney General explains that residential security deposits generally have specific permitted uses and that, subject to applicable exceptions, landlords generally must return the deposit or provide an itemized statement within 21 days after move-out.
+Examples include official guidance covering:
 
-California Courts provides official guidance on eviction notice types and explains that different notices can have different requirements and timelines.
+* California tenant rights
+* Security deposits
+* Eviction notice types
 
-RightsPath does not attempt to cover every California housing law, local ordinance, or possible tenancy situation.
+Relevant sources:
 
-The current prototype is intentionally limited in scope.
+* [California Attorney General - Tenants](https://oag.ca.gov/tenants)
+* [California Attorney General - Security Deposits](https://oag.ca.gov/system/files/media/Know-Your-Rights-Security-Deposits-English.pdf)
+* [California Courts - Eviction Notice Types](https://selfhelp.courts.ca.gov/eviction-tenant/notice-types)
+* [California Courts - Security Deposits](https://selfhelp.courts.ca.gov/fa/node/1268)
+
+Legal information can change and individual situations can depend on additional facts and local rules. Users should verify current official guidance and seek qualified assistance for consequential situations.
 
 ---
 
-## Architecture
+## Technical Architecture
 
 The application separates natural-language interpretation from legal rules and deterministic logic.
 
 ```text
-                    ┌───────────────────┐
-                    │   User Story      │
-                    └─────────┬─────────┘
-                              ↓
-                    ┌───────────────────┐
-                    │ Structured Facts  │
-                    └─────────┬─────────┘
-                              ↓
-                    ┌───────────────────┐
-                    │ Missing Facts     │
-                    │ Detection         │
-                    └─────────┬─────────┘
-                              ↓
-                    ┌───────────────────┐
-                    │ Verified Legal    │
-                    │ Rules             │
-                    └─────────┬─────────┘
-                              ↓
-                    ┌───────────────────┐
-                    │ Deterministic     │
-                    │ Checks            │
-                    └─────────┬─────────┘
-                              ↓
-                    ┌───────────────────┐
-                    │ Explanation       │
-                    └─────────┬─────────┘
-                              ↓
-                    ┌───────────────────┐
-                    │ Action Plan       │
-                    └─────────┬─────────┘
-                              ↓
-                    ┌───────────────────┐
-                    │ Action Letter     │
-                    └─────────┬─────────┘
-                              ↓
-                    ┌───────────────────┐
-                    │ PDF Export        │
-                    └───────────────────┘
+User Story
+    ↓
+AI / Structured Extraction
+    ↓
+Validated Case Data
+    ↓
+Missing-Fact Detection
+    ↓
+California Rule Data
+    ↓
+Deterministic Evaluation
+    ↓
+Plain-Language Explanation
+    ↓
+Action Plan
+    ↓
+Letter Generation
+    ↓
+PDF Export
 ```
+
+### Core principle
+
+> **AI interprets. Verified rules provide the legal basis. Deterministic logic handles structured checks and calculations.**
+
+This separation is intentional.
+
+It makes the system easier to reason about, test, and constrain than treating a single generated response as the final legal answer.
 
 ---
 
@@ -309,81 +262,73 @@ rightspath/
 
 ---
 
-## Technology
+## End-to-End Workflow
 
-### Application
+The current prototype implements:
 
-* Next.js
-* React
-* TypeScript
-* Tailwind CSS
+```text
+Landing
+   ↓
+Jurisdiction
+   ↓
+Issue Selection
+   ↓
+Tenant Story
+   ↓
+Case Analysis
+   ↓
+Case Review
+   ↓
+Rights / Source Information
+   ↓
+Action Plan
+   ↓
+Personalized Letter
+   ↓
+PDF Export
+```
 
-### UI
+The important product output is not just an explanation.
 
-* Framer Motion
-* Lucide React
-* Responsive, mobile-first interface
-* Accessibility-focused interaction patterns
+The renter leaves with:
 
-### AI and Validation
-
-* OpenAI API
-* Zod
-* Structured application data
-* Deterministic rule and date calculations
-
-### Document Generation
-
-* pdf-lib
-
-### Development
-
-* Node.js
-* ESLint
-* TypeScript
-* Automated Node test runner
-
-The project's current `package.json` defines the development, production build, linting, type-checking, and test commands used by the project.
-
----
-
-## Data and Privacy Design
-
-RightsPath is intentionally lightweight for the prototype.
-
-The application does not require user accounts for the core workflow.
-
-Draft case information can be maintained locally during the session rather than requiring a full account system.
-
-The prototype is designed around collecting only the information necessary for the supported workflow.
-
-Users should avoid entering unnecessary sensitive personal information.
+* Structured facts
+* Clearly identified missing information
+* A relevant verified source
+* Plain-language explanation
+* Practical next steps
+* A personalized action letter
+* Downloadable PDF
 
 ---
 
-## Validation and Testing
+## Validation & Testing
 
-Testing is treated as part of the product rather than as an afterthought.
+Testing is treated as part of the product.
 
-The project includes tests for:
+Current test status:
+
+**234 tests passing across 9 suites**
+
+The test coverage includes:
 
 * Intake behavior
-* Case analysis
 * Structured fact extraction
 * Missing-fact detection
-* Review behavior
+* Case analysis
+* Case review
 * Rule evaluation
-* Date calculations
 * Security-deposit rules
+* Date calculations
+* Derived calculations
 * Adversarial cases
 * Verified-rule integrity
-* Explanations
-* User experience states
-* Action plans
+* Explanation behavior
+* Action-plan generation
 * Letter generation
-* Derived calculations
 * Case evaluation
 * Rule-engine behavior
+* User-experience states
 
 ### Run tests
 
@@ -423,27 +368,64 @@ http://localhost:3000
 
 ---
 
+## Technology Stack
+
+### Application
+
+* Next.js
+* React
+* TypeScript
+* Tailwind CSS
+
+### UI
+
+* Framer Motion
+* Lucide React
+* Responsive, mobile-first interface
+* Accessibility-focused interaction patterns
+
+### AI & Validation
+
+* OpenAI API
+* Zod
+* Structured application data
+* Deterministic rule evaluation
+* Deterministic date calculations
+
+### Document Generation
+
+* pdf-lib
+
+### Development
+
+* Node.js
+* ESLint
+* TypeScript
+* Automated Node test runner
+
+---
+
 ## Design Philosophy
 
-RightsPath is deliberately designed to feel more like a trustworthy public-facing civic tool than a generic AI chatbot.
+RightsPath is intentionally designed to feel more like a trustworthy public-facing civic tool than a generic AI chatbot.
 
 The interface prioritizes:
 
-* Clear hierarchy
 * Plain language
+* Clear hierarchy
 * Visible progress
-* Strong readability
+* Readability
 * Accessible interactions
 * Calm visual design
 * Explicit uncertainty
 * Source transparency
 * Actionable outputs
 
-The product avoids relying on visual effects to communicate trust.
+The product avoids using visual effects as a substitute for trust.
 
-The guiding idea is:
+The central UX question is:
 
-> **The user should understand what RightsPath knows, what it does not know, and what they can do next.**
+> **What does RightsPath know, what does it not know, and what can the renter do next?**
 
 ---
 
@@ -464,9 +446,20 @@ The interface is designed with accessibility in mind, including:
 
 ---
 
+## Data & Privacy Design
+
+RightsPath is intentionally lightweight for the prototype.
+
+* The core workflow does not require user accounts.
+* Draft case information can be maintained locally during the session.
+* The prototype is designed to collect only information necessary for the supported workflow.
+* Users should avoid entering unnecessary sensitive personal information.
+
+---
+
 ## Limitations
 
-RightsPath is a prototype with intentionally limited scope.
+RightsPath is a hackathon prototype with intentionally limited scope.
 
 It currently:
 
@@ -487,7 +480,7 @@ For situations with serious consequences or uncertainty, users should seek quali
 
 ## AI Disclosure
 
-AI coding tools, including Cursor, ChatGPT, and other AI-assisted development tools, were used during development.
+AI coding and development tools, including **Cursor, ChatGPT, and other AI-assisted development tools**, were used during development.
 
 AI assistance was used for development, debugging, iteration, research support, and implementation assistance.
 
@@ -497,86 +490,25 @@ Within the application itself, AI is used as an interpretation and language-gene
 
 ---
 
-## Hackathon Context
+## Hackathon
 
-RightsPath was built for **LexHack 2026** as an entry in the legal-tech / access-to-justice space.
+Built for **LexHack 2026** in the **Access to Justice & Civic Tech** space.
 
-The project focuses on making the first step after a housing problem more understandable and actionable for renters.
+LexHack explicitly includes legal guidance, plain-language assistance, civic technology, and tenant/consumer-rights tools among its project themes.
 
-The prototype prioritizes:
+RightsPath focuses on making the first step after a housing problem more understandable and actionable for renters.
+
+The project emphasizes:
 
 * Real-world usefulness
-* Feasible implementation
+* Practical implementation
 * Technical reliability
 * Clear user experience
 * Responsible AI use
 * Source-grounded legal information
 * A concrete user-facing output
 
----
-
-## Project Status
-
-**Prototype: End-to-end workflow implemented.**
-
-The current workflow covers:
-
-```text
-Landing
-  ↓
-Jurisdiction
-  ↓
-Issue selection
-  ↓
-Tenant story
-  ↓
-Case analysis
-  ↓
-Case review
-  ↓
-Rights / source information
-  ↓
-Action plan
-  ↓
-Personalized letter
-  ↓
-PDF export
-```
-
----
-
-## Future Directions
-
-Potential future development could include:
-
-* Additional California housing issues
-* More comprehensive local-jurisdiction coverage
-* Additional verified legal sources
-* Expanded legal-aid referrals
-* Better document and notice analysis
-* More robust case-history management
-* Broader jurisdiction support
-* Professional review of expanded legal-rule coverage
-
-These are future possibilities rather than claims about the current prototype.
-
----
-
-## Disclaimer
-
-RightsPath provides general legal information and practical guidance.
-
-It is not a law firm, does not provide legal representation, and does not establish an attorney-client relationship.
-
-The information generated by RightsPath should not be treated as a definitive legal opinion.
-
-Users should consult a qualified attorney, legal-aid organization, or appropriate housing resource for advice about their specific circumstances.
-
----
-
-## License
-
-No open-source license has been added to this repository at this time.
+[LexHack 2026](https://lexhack-2026.devpost.com/)
 
 ---
 
@@ -586,25 +518,33 @@ No open-source license has been added to this repository at this time.
 
 **Purpose:** AI-powered tenant-rights intake and action-letter generation
 
-**Current jurisdiction:** California, United States
+**Jurisdiction:** California, United States
 
 **Development:** Independent hackathon project
 
 **AI development assistance:** Cursor, ChatGPT, and other AI-assisted development tools
 
----
-
-## Acknowledgements
-
 RightsPath builds on publicly available legal information and self-help resources published by California government institutions.
 
-Relevant sources include:
+---
 
-* California Department of Justice / Office of the Attorney General
-* California Courts Self-Help Guide
+## Disclaimer
 
-All legal information should be checked against the current official sources before being relied upon for a real-world situation.
+RightsPath provides general legal information and practical guidance.
 
+It is not a law firm, does not provide legal representation, and does not establish an attorney-client relationship.
 
-[1]: https://github.com/levilabs-hash/rightspath/blob/master/package.json "rightspath/package.json at master · levilabs-hash/rightspath · GitHub"
-[2]: https://oag.ca.gov/tenants?utm_source=chatgpt.com "Landlord-Tenant Issues | State of California - Department of Justice - Office of the Attorney General"
+Information generated by RightsPath should not be treated as a definitive legal opinion.
+
+Users should consult a qualified attorney, legal-aid organization, or appropriate housing resource for advice about their specific circumstances.
+
+---
+
+## License
+
+No open-source license has been added to this repository at this time.
+
+```
+
+[1]: https://lexhack-2026.devpost.com/rules "LexHack 2026: Empowering global student builders to pioneer AI solutions for legal tech, automated law, and AI safety. - Devpost"
+[2]: https://github.com/levilabs-hash/rightspath "GitHub - levilabs-hash/rightspath: AI-powered tenant rights intake and action-letter generator for California renters. · GitHub"
