@@ -464,7 +464,7 @@ function evaluateDeductionCategory(facts: DepositFacts): RuleFinding {
     finding: unresolved[relation.kind],
     explanation:
       "This is not a determination that a deduction fits the source, and it is not a determination that a deduction falls outside it.",
-    missingFacts: ["deductionReason"],
+    missingFacts: [],
     inputs,
   });
 }
